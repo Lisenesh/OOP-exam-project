@@ -7,24 +7,9 @@ class Dress:
         self.material = material
         self.price = price
 
-    def checkfilters(self, type=None, color=None, length=None, material=None):
-        x = 0
-        if type is not None and not isinstance(self, type):
-            x+=1
-
-        if color is not None and self.color != color:
-            x+=1
-
-        if length is not None and self.length != length:
-            x+=1
-
-        if material is not None and self.material != material:
-            x+=1
-
-        if x==4:
-            return True
-        else:
-            return False
+    def findDressName(self, userTypedType, userTypedLength, userTypedMaterial, userTypedColor):
+        if (userTypedMaterial == self.material and userTypedLength == self.length and userTypedType == self.type and userTypedColor == self.color):
+            print("The "+ userTypedType + " you are looking for is " + self.name)
 
 class WeddingDress(Dress):
     def __init__(self, name, color, length, material, price):
@@ -60,5 +45,10 @@ dresses = [
 #The point of the function is to take the average price of all the dresses according to filters
 #The main filter is the type of the dress
 #The filters after that will be affected by the type of dress chosen
-x = input("Enter the type of dress")
-print(WeddingDress.checkfilters(x,WeddingDress,"white","long","silk"))
+userTypedT = input("Input Dress type:")
+userTypedL = input("Input Dress length:")
+userTypedM = input("Input Dress material:")
+userTypedC = input("Input Dress color:")
+
+for dress in dresses:
+    dress.findDressName(userTypedT, userTypedL, userTypedM,userTypedC)
