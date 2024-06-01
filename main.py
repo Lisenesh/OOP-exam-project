@@ -9,8 +9,10 @@ class Dress:
 
     def findDressName(self, userTypedType, userTypedLength, userTypedMaterial, userTypedColor):
         if userTypedMaterial == self.material and userTypedLength == self.length and userTypedType == self.type and userTypedColor == self.color:
+            print("The " + userTypedType + " you are looking for is " + self.name + ". The price is " + str(self.price))
             return True
         return False
+
 
 
 class WeddingDress(Dress):
@@ -25,6 +27,28 @@ class WeddingDress(Dress):
 
 
 class SummerDress(Dress):
+    def __init__(self, name, color, length, material, price):
+        super().__init__(name, color, length, material, price)
+        self.type = self.__class__.__name__
+        self.name = name
+        self.color = color
+        self.length = length
+        self.material = material
+        self.price = price
+
+
+class EveningDress(Dress):
+    def __init__(self, name, color, length, material, price):
+        super().__init__(name, color, length, material, price)
+        self.type = self.__class__.__name__
+        self.name = name
+        self.color = color
+        self.length = length
+        self.material = material
+        self.price = price
+
+
+class BallGown(Dress):
     def __init__(self, name, color, length, material, price):
         super().__init__(name, color, length, material, price)
         self.type = self.__class__.__name__
@@ -50,13 +74,9 @@ userTypedT = input("Input Dress type:")
 userTypedL = input("Input Dress length:")
 userTypedM = input("Input Dress material:")
 userTypedC = input("Input Dress color:")
-
+x = 0
 for dress in dresses:
-    x = dress.findDressName(userTypedT, userTypedL, userTypedM, userTypedC)
-    if x:
-        break
-
-if x:
-    print("The " + userTypedT + " you are looking for is " + self.name)
-else:
-    print("Sorry, we don't have the dress you're looking for.")
+    if not dress.findDressName(userTypedT, userTypedL, userTypedM, userTypedC):
+        x += 1
+        if x == len(dresses):
+            print("Sorry, we have found no such dresses")
