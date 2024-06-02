@@ -1,56 +1,95 @@
 class Dress:
-    def __init__(self, name, color, length, material, price):
+    def __init__(self, name, color, length, material, basePrice):
         self.type = self.__class__.__name__
         self.name = name
         self.color = color
         self.length = length
         self.material = material
-        self.price = price
+        self.basePrice = basePrice
 
     def findDressName(self, userTypedType, userTypedLength, userTypedMaterial, userTypedColor):
         if userTypedMaterial == self.material and userTypedLength == self.length and userTypedType == self.type and userTypedColor == self.color:
-            print("The " + userTypedType + " you are looking for is " + self.name + ". The price is " + str(self.price))
+            print("The " + userTypedType + " you are looking for is " + self.name)
             return True
         return False
 
+    def CalculatePrice(self, basePrice, userTypedLength, userTypedMaterial):
+        match userTypedLength:
+            case "short":
+                basePrice *= 1
+            case "medium":
+                basePrice *= 1.5
+            case "long":
+                basePrice *= 2
+            case _:
+                "Please try another length"
+        match userTypedMaterial:
+            case "wool":
+                basePrice += 5
+            case "cotton":
+                basePrice += 10
+            case "chiffon":
+                basePrice += 15
+            case "silk":
+                basePrice += 20
+            case "velvet":
+                basePrice += 25
+            case _:
+                "Please try another material"
+        print("The price of this dress is " + str(basePrice))
+
 
 class WeddingDress(Dress):
-    def __init__(self, name, length, material, price):
-        super().__init__(name, "white", length, material, price)
+    def __init__(self, name, length, material):
+        super().__init__(name, "white", length, material, 100)
         self.type = self.__class__.__name__
 
 
 class SummerDress(Dress):
-    def __init__(self, name, color, length, price):
-        super().__init__(name, color, length, "cotton", price)
+    def __init__(self, name, color, length):
+        super().__init__(name, color, length, "cotton", 60)
         self.type = self.__class__.__name__
+
+    def CalculatePrice(self, basePrice, userTypedLength, userTypedMaterial):
+        match userTypedLength:
+            case "short":
+                basePrice *= 1
+            case "medium":
+                basePrice *= 1.5
+            case "long":
+                basePrice *= 2
+            case _:
+                "Please try another length"
+        basePrice += 10
+        print("The price of this dress is " + basePrice)
+        return basePrice
 
 
 class EveningDress(Dress):
-    def __init__(self, name, material, price):
-        super().__init__(name, "dark", "medium", material, price)
+    def __init__(self, name, material,):
+        super().__init__(name, "dark", "medium", material, 70)
         self.type = self.__class__.__name__
 
 
 class BallGown(Dress):
-    def __init__(self, name, color, material, price):
-        super().__init__(name, color, "long", material, price)
+    def __init__(self, name, color, material):
+        super().__init__(name, color, "long", material, 85)
         self.type = self.__class__.__name__
 
 
 dresses = [
-    WeddingDress("Flondon", "long", "silk", 120),
-    WeddingDress("Gondor", "short", "cotton", 176),
-    WeddingDress("Liskom",  "long", "cotton", 139),
-    SummerDress("Lalimba", "yellow", "medium", 55),
-    SummerDress("Trinda", "aqua", "short", 63),
-    SummerDress("Skilora", "ruby", "medium", 79),
-    EveningDress("Pirezi", "chiffon", 155),
-    EveningDress("Lamida", "silk", 159),
-    EveningDress("Verosiks", "velvet", 167),
-    BallGown("Vrisket", "lightblue", "wool", 55),
-    BallGown("Baret", "pink", "cotton", 150),
-    BallGown("Erida", "lila", "velvet", 79)
+    WeddingDress("Flondon", "long", "silk"),
+    WeddingDress("Gondor", "short", "cotton"),
+    WeddingDress("Liskom",  "long", "cotton"),
+    SummerDress("Lalimba", "yellow", "medium"),
+    SummerDress("Trinda", "aqua", "short"),
+    SummerDress("Skilora", "ruby", "medium"),
+    EveningDress("Pirezi", "chiffon"),
+    EveningDress("Lamida", "silk"),
+    EveningDress("Verosiks", "velvet"),
+    BallGown("Vrisket", "lightblue", "wool"),
+    BallGown("Baret", "pink", "cotton"),
+    BallGown("Erida", "lila", "velvet")
 ]
 
 # The main filter is the type of the dress
@@ -75,9 +114,9 @@ match userTypedT:
         userTypedC = input("Input Dress color(lightblue/pink/lila):")
 x = 0
 for dress in dresses:
-    if not dress.findDressName(userTypedT, userTypedL, userTypedM, userTypedC):
-        x += 1
-        if x == len(dresses):
-            print("Sorry, we have found no such dresses")
-
-print(userTypedT, userTypedL, userTypedM, userTypedC)
+    if dress.findDressName(userTypedT, userTypedL, userTypedM, userTypedC):
+        dress.CalculatePrice(dress.basePrice, userTypedL, userTypedM)
+        continue
+    x += 1
+    if x == len(dresses):
+        print("Sorry, we have found no such dresses")
