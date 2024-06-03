@@ -14,15 +14,6 @@ class Dress:
         return False
 
     def CalculatePrice(self, basePrice, userTypedLength, userTypedMaterial):
-        match userTypedLength:
-            case "short":
-                basePrice *= 1
-            case "medium":
-                basePrice *= 1.5
-            case "long":
-                basePrice *= 2
-            case _:
-                "Please try another length"
         match userTypedMaterial:
             case "wool":
                 basePrice += 5
@@ -36,6 +27,15 @@ class Dress:
                 basePrice += 25
             case _:
                 "Please try another material"
+        match userTypedLength:
+            case "short":
+                basePrice *= 1
+            case "medium":
+                basePrice *= 1.5
+            case "long":
+                basePrice *= 2
+            case _:
+                "Please try another length"
         print("The price of this dress is " + str(basePrice))
 
 
@@ -51,6 +51,7 @@ class SummerDress(Dress):
         self.type = self.__class__.__name__
 
     def CalculatePrice(self, basePrice, userTypedLength, userTypedMaterial):
+        basePrice += 10
         match userTypedLength:
             case "short":
                 basePrice *= 1
@@ -60,7 +61,6 @@ class SummerDress(Dress):
                 basePrice *= 2
             case _:
                 "Please try another length"
-        basePrice += 10
         print("The price of this dress is " + basePrice)
         return basePrice
 
@@ -70,11 +70,45 @@ class EveningDress(Dress):
         super().__init__(name, "dark", "medium", material, 70)
         self.type = self.__class__.__name__
 
+    def CalculatePrice(self, basePrice, userTypedLength, userTypedMaterial):
+        match userTypedMaterial:
+            case "wool":
+                basePrice += 5
+            case "cotton":
+                basePrice += 10
+            case "chiffon":
+                basePrice += 15
+            case "silk":
+                basePrice += 20
+            case "velvet":
+                basePrice += 25
+            case _:
+                "Please try another material"
+        basePrice *= 1.5
+        return basePrice
+
 
 class BallGown(Dress):
     def __init__(self, name, color, material):
         super().__init__(name, color, "long", material, 85)
         self.type = self.__class__.__name__
+
+    def CalculatePrice(self, basePrice, userTypedLength, userTypedMaterial):
+        match userTypedMaterial:
+            case "wool":
+                basePrice += 5
+            case "cotton":
+                basePrice += 10
+            case "chiffon":
+                basePrice += 15
+            case "silk":
+                basePrice += 20
+            case "velvet":
+                basePrice += 25
+            case _:
+                "Please try another material"
+        basePrice *= 2
+        return basePrice
 
 
 dresses = [
