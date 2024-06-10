@@ -2,8 +2,6 @@ from tests import CalcCheck
 import Instanses
 
 
-# The main filter is the type of the dress
-# The filters after that will be affected by the type of dress chosen
 userTypedT = input("Input Dress type(WeddingDress/SummerDress/EveningDress/BallGown):")
 match userTypedT:
     case "WeddingDress":
