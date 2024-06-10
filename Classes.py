@@ -36,7 +36,8 @@ class Dress:
                 basePrice *= 2
             case _:
                 "Please try another length"
-        print("The price of this dress is " + str(basePrice))
+        print("The price of this dress is " + str(int(basePrice)))
+        return basePrice
 
 
 class WeddingDress(Dress):
@@ -61,7 +62,7 @@ class SummerDress(Dress):
                 basePrice *= 2
             case _:
                 "Please try another length"
-        print("The price of this dress is " + basePrice)
+        print("The price of this dress is " + str(int(basePrice)))
         return basePrice
 
 
