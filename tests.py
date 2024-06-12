@@ -1,11 +1,10 @@
 import Instanses
 
 
-def CalcCheck():
+def CalcCheck(UserTypedName):
     x = 0
     lengthPrice = 1
     materialPrice = 0
-    UserTypedName = input("What's the name of the dress that you would like to buy?\n")
     for dress in Instanses.dresses:
         if UserTypedName == dress.name:
             break

@@ -23,8 +23,9 @@ match userTypedT:
 x = 0
 for dress in Instanses.dresses:
     if dress.findDressName(userTypedT, userTypedL, userTypedM, userTypedC):
-        t = dress.CalculatePrice(dress.basePrice, userTypedL, userTypedM)
-        if CalcCheck() == t:
+        print("The price of this dress is " + str(int(dress.CalculatePrice(dress.basePrice, userTypedL, userTypedM))))
+        UserTypedName = input("What's the name of the dress you would like to find?")
+        if CalcCheck(UserTypedName) == dress.CalculatePrice(dress.basePrice, userTypedL, userTypedM):
             print("The price is calculated correctly")
         else:
             print("Something went wrong")
@@ -32,3 +33,35 @@ for dress in Instanses.dresses:
     x += 1
     if x == len(Instanses.dresses):
         print("Sorry, we have found no such dresses")
+
+
+UserTypedName = "Flondon"
+x = 0
+if CalcCheck(UserTypedName) == Instanses.dresses[x].CalculatePrice(Instanses.dresses[x].basePrice, Instanses.dresses[x].length, Instanses.dresses[x].material):
+    print("The check was successful")
+else:
+    print("Something went wrong")
+
+
+UserTypedName = "Trinda"
+x = 4
+if CalcCheck(UserTypedName) == Instanses.dresses[x].CalculatePrice(Instanses.dresses[x].basePrice, Instanses.dresses[x].length, Instanses.dresses[x].material):
+    print("The check was successful")
+else:
+    print("Something went wrong")
+
+
+UserTypedName = "Verosiks"
+x = 8
+if CalcCheck(UserTypedName) == Instanses.dresses[x].CalculatePrice(Instanses.dresses[x].basePrice, Instanses.dresses[x].length, Instanses.dresses[x].material):
+    print("The check was successful")
+else:
+    print("Something went wrong")
+
+
+UserTypedName = "Baret"
+x = 10
+if CalcCheck(UserTypedName) == Instanses.dresses[x].CalculatePrice(Instanses.dresses[x].basePrice, Instanses.dresses[x].length, Instanses.dresses[x].material):
+    print("The check was successful")
+else:
+    print("Something went wrong")
